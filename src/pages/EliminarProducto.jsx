@@ -3,6 +3,7 @@ import { useProductos } from '../context/ProductosContext.jsx';
 import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { useEffect } from 'react';
 
 const EliminarProducto = () => {
   const { productos, setProductos } = useProductos();
@@ -25,6 +26,13 @@ const EliminarProducto = () => {
     alert("Producto eliminado correctamente");
     navigate("/Admin");
   };
+
+  useEffect(() => {
+  const productosGuardados = localStorage.getItem("productos");
+  if (productosGuardados) {
+    setProductos(JSON.parse(productosGuardados));
+  }
+}, []);
 
   return (
     <div className="p-4" style={{ maxWidth: '600px', margin: 'auto' }}>

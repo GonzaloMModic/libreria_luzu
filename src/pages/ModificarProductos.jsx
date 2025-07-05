@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { useEffect } from 'react';
 
 const ModificarProducto = () => {
   const { productos, setProductos } = useProductos();
@@ -70,6 +71,14 @@ const ModificarProducto = () => {
     alert("Producto actualizado correctamente");
     navigate("/Admin");
   };
+
+
+    useEffect(() => {
+    const productosGuardados = localStorage.getItem("productos");
+    if (productosGuardados) {
+      setProductos(JSON.parse(productosGuardados));
+    }
+  }, []);
 
   return (
     <div className="p-4" style={{ maxWidth: '800px', margin: 'auto' }}>
